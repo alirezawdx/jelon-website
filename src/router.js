@@ -5,7 +5,8 @@ import TeamView from './views/TeamView.vue';
 
 export default createRouter({
   history: createWebHistory(),
-  linkActiveClass: 'bg-base-300',
+  linkActiveClass: 'text-green-500',
+  linkExactActiveClass: 'text-emerald-500',
   routes: [
     {
       name: 'home',

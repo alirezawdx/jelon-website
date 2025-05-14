@@ -1,7 +1,13 @@
 <script setup>
 import JelonLogo from '../assets/jelon-logo-compressed.png';
 
-defineProps(['version']);
+defineProps([
+  'links',
+  'isDark',
+  'toggleDarkMode',
+  'mobileMenuOpen',
+  'toggleMobileMenu',
+]);
 </script>
 
 <template>
@@ -17,26 +23,14 @@ defineProps(['version']);
 
     <div class="flex items-center space-x-6">
       <div class="hidden md:flex space-x-6">
-        <a
-          href="#features"
+        <router-link
+          v-for="link in links"
+          :key="link.path"
+          :to="link.path"
           class="text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300"
-          >Features</a
         >
-        <a
-          href="#examples"
-          class="text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300"
-          >Examples</a
-        >
-        <a
-          href="#installation"
-          class="text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300"
-          >Installation</a
-        >
-        <a
-          href="#docs"
-          class="text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300"
-          >Docs</a
-        >
+          {{ link.text }}
+        </router-link>
       </div>
 
       <!-- Dark mode toggle -->
@@ -76,7 +70,7 @@ defineProps(['version']);
         </svg>
       </button>
 
-      <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">
+      <button @click="toggleMobileMenu" class="md:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 text-gray-700 dark:text-gray-300"
@@ -97,31 +91,25 @@ defineProps(['version']);
 
   <!-- Mobile menu -->
   <transition
-    enter-active-class="transition duration-300 ease-out"
-    enter-from-class="transform -translate-y-full opacity-0"
-    enter-to-class="transform translate-y-0 opacity-100"
-    leave-active-class="transition duration-200 ease-in"
-    leave-from-class="transform translate-y-0 opacity-100"
-    leave-to-class="transform -translate-y-full opacity-0"
+    enter-active-class="transition duration-300 ease-in"
+    enter-from-class="transform  opacity-0"
+    enter-to-class="transform opacity-100"
+    leave-active-class="transition duration-200 ease-out"
+    leave-from-class="transform opacity-100"
+    leave-to-class="transform opacity-0"
   >
     <div
       v-if="mobileMenuOpen"
-      class="md:hidden px-4 py-2 border-t border-gray-200/50 dark:border-gray-800/50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md"
+      class="md:hidden px-4 py-2 border-t border-gray-200/50 dark:border-gray-800/50 bg-white/90 dark:bg-gray-900/90"
     >
-      <a href="#features" class="block py-2 text-gray-600 dark:text-gray-300"
-        >Features</a
-      >
-      <a href="#examples" class="block py-2 text-gray-600 dark:text-gray-300"
-        >Examples</a
-      >
-      <a
-        href="#installation"
+      <router-link
+        v-for="link in links"
+        :key="link.path"
+        :to="link.path"
         class="block py-2 text-gray-600 dark:text-gray-300"
-        >Installation</a
       >
-      <a href="#docs" class="block py-2 text-gray-600 dark:text-gray-300"
-        >Docs</a
-      >
+        {{ link.text }}
+      </router-link>
     </div>
   </transition>
 </template>
