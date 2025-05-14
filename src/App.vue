@@ -1,13 +1,25 @@
-<template>
-  <div class="container mx-auto">
-    <router-link to="/">Home</router-link>
-    <router-link to="/team">Team</router-link>
+<script setup>
+import TheNavbar from './components/TheNavbar.vue';
+</script>
 
-    <router-view #="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+<template>
+  <div class="container p-3 mx-auto">
+    <header>
+      <nav>
+        <the-navbar #links version="v1.0">
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/team">Team</router-link></li>
+        </the-navbar>
+      </nav>
+    </header>
+
+    <main>
+      <router-view #="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
   </div>
 </template>
 
