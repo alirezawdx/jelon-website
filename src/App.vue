@@ -1,25 +1,38 @@
 <script setup>
 import TheNavbar from './components/TheNavbar.vue';
+import TheFooter from './components/TheFooter.vue';
+import { ref } from 'vue';
+
+const jelonVersion = ref('v1.0');
 </script>
 
 <template>
   <div class="container p-3 mx-auto">
     <header>
       <nav>
-        <the-navbar #links version="v1.0">
+        <the-navbar #links :version="jelonVersion">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/team">Team</router-link></li>
         </the-navbar>
       </nav>
     </header>
 
-    <main>
+    <main class="my-5">
       <router-view #="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
     </main>
+
+    <footer>
+      <the-footer :version="jelonVersion">
+        <template #links>
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/team">Team</router-link></li>
+        </template>
+      </the-footer>
+    </footer>
   </div>
 </template>
 
