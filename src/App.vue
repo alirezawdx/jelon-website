@@ -17,7 +17,7 @@ const jelonVersion = ref('v1.0');
       </nav>
     </header>
 
-    <main class="my-5">
+    <main class="my-3">
       <router-view #="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
